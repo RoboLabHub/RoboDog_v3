@@ -1,0 +1,10 @@
+<launch>
+  <node pkg="robodog" type="robodog_hw" name="robodog_hw" output="screen" />
+<!--
+  <node name="pi_camera" pkg="cv_camera" type="cv_camera_node" output="screen">
+    <param name="device_id" value="0" />
+    <param name="frame_id" value="pi_camera" />
+    <param name="rate" value="5" />
+  </node>
+-->
+</launch>

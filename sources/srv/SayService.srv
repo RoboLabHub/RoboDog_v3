@@ -1,0 +1,5 @@
+string lang
+string options
+string text
+---
+int32 result
