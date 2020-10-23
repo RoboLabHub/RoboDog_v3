@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.0)
-project(robodog_v3 VERSION 1.0.0)
+project(robodog VERSION 1.0.0)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)

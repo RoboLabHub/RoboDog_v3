@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>robodog_v3</name>
+  <name>robodog</name>
   <version>1.0.0</version>
   <description>The robodog v3 package</description>
 
