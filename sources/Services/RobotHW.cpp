@@ -25,11 +25,6 @@
 #include "MathHelpers.h"
 
 #include "ros/ros.h"
-#include "std_msgs/String.h"
-#include "std_msgs/Float32MultiArray.h"
-
-#include <tf2/LinearMath/Transform.h>
-#include "fiducial_msgs/FiducialTransformArray.h"
 
 #include "robodog/SayService.h"
 #include "robodog/GcodeService.h"
