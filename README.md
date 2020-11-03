@@ -17,3 +17,6 @@ https://youtu.be/G8RhfWOTVbI
 
 RoboDog V2 instructions to make:<br/>
 https://www.instructables.com/DIY-Spot-Like-Quadruped-Robot/
+
+The image for Raspberry PI4:
+https://github.com/RoboLabHub/Tips/tree/master/RoboDog_image
