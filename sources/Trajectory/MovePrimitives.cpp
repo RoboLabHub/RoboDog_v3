@@ -467,7 +467,7 @@ bool MovePrimitives::walk_4(int forward_step, int side_step)
     int max_step = std::max(abs(forward_step), abs(side_step));
     max_step = std::max(max_step, abs(2*rotate_step));
 
-    const double kStepK = 0.09 / 50;
+    const double kStepK = 0.09 / 30;
     auto time = 0.10 + max_step * kStepK;
     double height1 = 0.01 + (0.01 * (max_step / 50.0));
     double height2 = -0.005;

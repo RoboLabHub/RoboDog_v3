@@ -323,18 +323,17 @@ void RemoteController::CommThreadBody()
             bool moveFinished = ros::Time::now() >= (m_robot->GetGcodeCtrl()->GetMoveFinishTime() - ros::Duration(0.2));
 
             if (m_btnR3->clicked()) cmd = "S 150\n$POSE 3\n";
-
-            if (m_btnR1->clicked()) {
+            else if (m_btnR2->clicked()) cmd = "S 150\n$POSE 4\n";
+            else if (m_btnR1->clicked()) {
                 cmd = "S 150\n$POSE 0\nW 500\nSERVO_OFF\n";
                 m_recording = m_playing = false;
             }
-
-            if (m_btnL3->double_clicked()) {
+            else if (m_btnL3->double_clicked()) {
                 send_message("Recording...");
 
                 m_recording = true;
             }
-            if (m_btnL2->double_clicked()) {
+            else if (m_btnL2->double_clicked()) {
                 send_message("Plaing...");
                 m_playing = true;
             }
@@ -344,15 +343,15 @@ void RemoteController::CommThreadBody()
                 changedRotOffset = true;
             }
             else if (m_btnL1->on()) {
-                rotY = constrain(rotY - data->y2/10, -45, 45);
-                rotZ = constrain(rotZ + data->x2/10, -45, 45);
+                rotY = constrain(rotY - data->y2/20, -45, 45);
+                rotZ = constrain(rotZ + data->x2/20, -45, 45);
                 if (m_btnRight->clicked()) rotY = rotZ = 0;
 
                 changedRotOffset = true;
             }
             else if (m_btnL2->on()) {
-                rotX          = constrain(rotX          - data->x2/5,  -45 , 45);
-                offsetForward = constrain(offsetForward + data->y2/5, -100, 100);
+                rotX          = constrain(rotX          - data->x2/20,  -45 , 45);
+                offsetForward = constrain(offsetForward + data->y2/10, -100, 100);
                 if (m_btnRight->clicked()) rotX = offsetForward = 0;
                 changedRotOffset = true;
             }
@@ -363,7 +362,7 @@ void RemoteController::CommThreadBody()
                 changedRotOffset = true;
             }
             else if (!m_btnR2->on() && abs(data->y2) > 5) {
-                rotY  = constrain(rotY - data->y2/10, -30, 30);
+                rotY  = constrain(rotY - data->y2/20, -30, 30);
                 changedAngle = true;
             }
             else if (m_btnRight->clicked()) {
@@ -374,7 +373,7 @@ void RemoteController::CommThreadBody()
             if (changedRotOffset) {
                 cmd += utils::printf("BASE_ROT %d %d %d\n", rotX, rotY, rotZ);
                 cmd += utils::printf("BASE_OFFSET %d %d %d\n", offsetForward, offsetSide, offsetHeight);
-                cmd += utils::printf("S 200\n$SET_POSE 0 0 0\n");
+                cmd += utils::printf("S 100\n$SET_POSE 0 0 0\n");
             }
             else {
 
@@ -400,7 +399,7 @@ void RemoteController::CommThreadBody()
                     else {
                         int forward_step = data->y1 /  2;
                         int side_step    = data->x2 /  4;
-                        int rotate_step  = data->x1 / 10;
+                        int rotate_step  = data->x1 / 20;
 
                         if (m_robot->GetVer() == 2) {
                             forward_step /= 1.5;
@@ -424,7 +423,7 @@ void RemoteController::CommThreadBody()
                     if (moveFinished) {
                         cmd += utils::printf("BASE_ROT %d %d %d\n", rotX, rotY, rotZ);
                         cmd += utils::printf("BASE_OFFSET %d %d %d\n", offsetForward, offsetSide, offsetHeight);
-                        cmd += utils::printf("S 200\n$SET_POSE 0 0 0\n");
+                        cmd += utils::printf("S 100\n$SET_POSE 0 0 0\n");
                     } else {
                         std::lock_guard<std::mutex> guard(m_cmdMutex);
                         m_cmd = utils::printf("BASE_ROT %d %d %d\n", rotX, rotY, rotZ);
